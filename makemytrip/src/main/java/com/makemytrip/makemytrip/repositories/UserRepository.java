@@ -1,4 +1,4 @@
-package com.makemytrip.makemytrip.reprositries;
+package com.makemytrip.makemytrip.repositories;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import com.makemytrip.makemytrip.models.Users;

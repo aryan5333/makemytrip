@@ -11,7 +11,7 @@ import { Button } from "./ui/button";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
-import { signup, login } from "@/api/index";
+import { Signup, login } from "@/api/index";
 import { setUser } from "@/store/index";
 import { useDispatch } from "react-redux";
 const SignupDialog = ({ trigger }: any) => {
@@ -21,13 +21,13 @@ const SignupDialog = ({ trigger }: any) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [open, setopem] = useState(false);
+  const [open, setopen] = useState(false);
   const dispatch = useDispatch();
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSignup) {
       try {
-        const signin = await signup(
+        const signin = await Signup(
           firstName,
           lastName,
           email,
@@ -35,6 +35,8 @@ const SignupDialog = ({ trigger }: any) => {
           password
         );
         dispatch(setUser(signin));
+        setopen(false);
+        clearform();
       } catch (error) {
         console.log(error);
       }
@@ -42,7 +44,8 @@ const SignupDialog = ({ trigger }: any) => {
       try {
         const data = await login(email, password);
         dispatch(setUser(data));
-        setopem(false);
+        setopen(false);
+        console.log(data);
         clearform();
       } catch (error) {
         console.log(error);
@@ -57,7 +60,7 @@ const SignupDialog = ({ trigger }: any) => {
     setPhoneNumber("");
   };
   return (
-    <Dialog open={open} onOpenChange={setopem}>
+    <Dialog open={open} onOpenChange={setopen}>
       <DialogTrigger asChild>
         {trigger}
       </DialogTrigger>

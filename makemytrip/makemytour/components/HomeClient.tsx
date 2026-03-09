@@ -17,6 +17,7 @@ export default function HomeClient() {
         }}
       >
         <div className="flex justify-center items-center h-full">
+          <SignupDialog />
           
         
         </div>
